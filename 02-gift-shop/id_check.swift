@@ -22,10 +22,10 @@ func valid(n: String) -> Bool {
   return false
 }
 
-func check(lo: String, hi: String) -> UInt64 {
-  var acc: UInt64 = 0
+func check(lo: String, hi: String) -> Int {
+  var acc: Int = 0
 
-  for id in UInt64(lo)!...UInt64(hi)! {
+  for id in Int(lo)!...Int(hi)! {
     acc += valid(n: String(id)) ? 0 : id
   }
 
@@ -37,7 +37,7 @@ let ids = try! String(contentsOfFile: CommandLine.arguments[1], encoding: .ascii
   .map(String.init)
   .first!
 
-var acc: UInt64 = 0
+var acc: Int = 0
 for id in ids.split(separator: ",") {
   let pack = id.split(separator: "-").map({String($0)})
   acc += check(lo: pack[0], hi: pack[1])
@@ -69,10 +69,10 @@ func hasRepeatingSubstring(n: String) -> Bool {
   return false
 }
 
-func checkRepeating(lo: String, hi: String) -> UInt64 {
-  var acc: UInt64 = 0
+func checkRepeating(lo: String, hi: String) -> Int {
+  var acc = 0
 
-  for id in UInt64(lo)!...UInt64(hi)! {
+  for id in Int(lo)!...Int(hi)! {
     acc += hasRepeatingSubstring(n: String(id)) ? id : 0
   }
 
