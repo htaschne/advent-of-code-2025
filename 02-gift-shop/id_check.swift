@@ -23,12 +23,10 @@ func valid(n: String) -> Bool {
 }
 
 func check(lo: String, hi: String) -> Int {
-  var acc: Int = 0
-
+  var acc = 0
   for id in Int(lo)!...Int(hi)! {
     acc += valid(n: String(id)) ? 0 : id
   }
-
   return acc
 }
 
@@ -42,7 +40,6 @@ for id in ids.split(separator: ",") {
   let pack = id.split(separator: "-").map({String($0)})
   acc += check(lo: pack[0], hi: pack[1])
 }
-
 print(acc)
 
 // part II
@@ -52,8 +49,8 @@ func hasRepeatingSubstring(n: String) -> Bool {
 
   for len in 1...(n.count / 2) {
     if n.count % len != 0 { continue }
-    var isRepeating = true
     
+    var isRepeating = true
     for i in 0..<n.count {
       if n[i] != n[i % len] {
         isRepeating = false
@@ -71,11 +68,9 @@ func hasRepeatingSubstring(n: String) -> Bool {
 
 func checkRepeating(lo: String, hi: String) -> Int {
   var acc = 0
-
   for id in Int(lo)!...Int(hi)! {
     acc += hasRepeatingSubstring(n: String(id)) ? id : 0
   }
-
   return acc
 }
 
@@ -84,5 +79,4 @@ for id in ids.split(separator: ",") {
   let pack = id.split(separator: "-").map({String($0)})
   acc += checkRepeating(lo: pack[0], hi: pack[1])
 }
-
 print(acc)
