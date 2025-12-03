@@ -21,6 +21,22 @@ func highestVoltage(_ bank: [Int]) -> Int {
   return 10 * hi + next
 }
 
+func highestBank(_ bank: [Int]) -> Int {
+  var acc = 0
+  var biggestIndex = 0
+  for j in [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0] {
+    var biggest = 0
+    for i in (biggestIndex)..<(bank.count - j) {
+      if bank[i] > biggest {
+        biggest = bank[i]
+        biggestIndex = i + 1
+      }
+      
+    }
+    acc = acc * 10 + biggest
+  }
+  return acc
+}
 
 let banks: [[Int]] = try String(contentsOfFile: CommandLine.arguments[1], encoding: .ascii)
   .split(whereSeparator: \.isNewline)
@@ -33,4 +49,9 @@ for bank in banks {
 }
 print(acc)
 
+acc = 0
+for bank in banks {
+  acc += highestBank(bank)
+}
 
+print(acc)
