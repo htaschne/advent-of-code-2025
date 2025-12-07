@@ -23,7 +23,6 @@ func rolls(_ grid: [Coord: Character], _ r: Int, _ c: Int, _ mr: Int, _ mc: Int)
   return 1
 }
 
-
 let lines = try String(contentsOfFile: CommandLine.arguments[1], encoding: .ascii)
   .split(whereSeparator: \.isNewline)
   .map(String.init)
@@ -42,7 +41,6 @@ for (r, row) in Array(lines).enumerated() {
 var rollsRemoved = 0
 var i = 0
 while true {
-  i += 1
   var forklifts = 0
   var newGrid: [Coord: Character] = [:]
   for r in 0...mr {
@@ -59,13 +57,17 @@ while true {
 
   grid = newGrid
 
+  if i == 0 {
+    print(forklifts)
+  }
+  i += 1
+
   rollsRemoved += forklifts
   if forklifts == 0 {
     break
   }
 }
 
-// print(forklifts)
 print(rollsRemoved)
 
 // for r in 0...mr {
