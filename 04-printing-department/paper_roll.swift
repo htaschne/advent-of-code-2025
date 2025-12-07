@@ -39,19 +39,34 @@ for (r, row) in Array(lines).enumerated() {
   mr = max(r, mr)
 }
 
-var forklifts = 0
-var newGrid: [Coord: Character] = [:]
-for r in 0...mr {
-  for c in 0...mc {
-    let ok = rolls(grid, r, c,  mr, mc)
-    if ok > 0 {
-      newGrid[Coord(r: r, c: c)] = "x"
-      forklifts += 1
-    } else {
-      newGrid[Coord(r: r, c: c)] = grid[Coord(r: r, c: c)]
+var rollsRemoved = 0
+var i = 0
+while true {
+  i += 1
+  var forklifts = 0
+  var newGrid: [Coord: Character] = [:]
+  for r in 0...mr {
+    for c in 0...mc {
+      let ok = rolls(grid, r, c,  mr, mc)
+      if ok > 0 {
+        newGrid[Coord(r: r, c: c)] = "."
+        forklifts += 1
+      } else {
+        newGrid[Coord(r: r, c: c)] = grid[Coord(r: r, c: c)]
+      }
     }
   }
+
+  grid = newGrid
+
+  rollsRemoved += forklifts
+  if forklifts == 0 {
+    break
+  }
 }
+
+// print(forklifts)
+print(rollsRemoved)
 
 // for r in 0...mr {
 //   for c in 0...mc {
@@ -60,4 +75,3 @@ for r in 0...mr {
 //   }
 //   print()
 // }
-print(forklifts)
